@@ -2,10 +2,13 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+@app.get('/user/me')
+async def read_user_me():
+    return{"user_id":"current user me!"}
+ 
 
-
-@app.get('/item/{item_id}')
-async def root(item_id:int):
-    return {"item_id":"item_id"}
+@app.get('/user/{user_id}')
+async def read_user(user_id:str):
+    return {"user_id": user_id}
 
     
