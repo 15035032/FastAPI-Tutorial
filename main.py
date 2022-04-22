@@ -1,20 +1,12 @@
-from enum import Enum
+
 from fastapi import FastAPI
 
 app = FastAPI()
 
-class ModelName(str,Enum):
-    alexnet = "alexnet"
-    resnet = "resnet"
-    lenet = "lenet"
 
  
-@app.get('/model_name/{model_name}')
-async def read_model_name(model_name:ModelName):
-    if model_name == ModelName.alexnet:
-        return{"model_name":model_name,"message":"Deep Learning FTW!"}
-    if model_name.value == "lenet":
-        return{"model_name":model_name,"message":"LeCNN all the images"}
-    return {"model_name": model_name,"message":"Have some residuals"}
+@app.get('/file/{file_path:path}')
+async def read_file_path(file_path:str):
+    return {"file_path": file_path}
 
     
