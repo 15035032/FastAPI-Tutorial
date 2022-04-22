@@ -1,14 +1,20 @@
+from enum import Enum
 from fastapi import FastAPI
 
 app = FastAPI()
 
-@app.get('/user/me')
-async def read_user_me():
-    return{"user_id":"current user me!"}
- 
+class ModelName(str,Enum):
+    alexnet = "alexnet"
+    resnet = "resnet"
+    lenet = "lenet"
 
-@app.get('/user/{user_id}')
-async def read_user(user_id:str):
-    return {"user_id": user_id}
+ 
+@app.get('/model_name/{model_name}')
+async def read_model_name(model_name:ModelName):
+    if model_name == ModelName.alexnet:
+        return{"model_name":model_name,"message":"Deep Learning FTW!"}
+    if model_name.value == "lenet":
+        return{"model_name":model_name,"message":"LeCNN all the images"}
+    return {"model_name": model_name,"message":"Have some residuals"}
 
     
